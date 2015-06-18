@@ -311,7 +311,7 @@ class Cli extends AbstractCli implements DriverInterface
     {
         if ($fingerprint === null) {
             throw new \Exception(
-                'Public key not found: '.$keyId,
+                'Public key not found: '.$fingerprint,
                 self::ERROR_KEY_NOT_FOUND
             );
         }
@@ -1018,7 +1018,7 @@ class Cli extends AbstractCli implements DriverInterface
         $output = '';
 
         switch ($mode) {
-        case PhpGpg::SIG_MODE_DETACHED:
+        case PhpGpg::SIG_MODE_DETACH:
             $operation = '--detach-sign';
             break;
         case PhpGpg::SIG_MODE_CLEAR:
@@ -1037,9 +1037,9 @@ class Cli extends AbstractCli implements DriverInterface
         }
 
         //ignore for now
-        if ($textmode) {
+        /*if ($textmode) {
             $arguments[] = '--textmode';
-        }
+        }*/
 
         foreach ($this->signKeys as $key) {
             $arguments[] = '--local-user '.
